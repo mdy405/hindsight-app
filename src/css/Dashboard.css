@@ -1,0 +1,109 @@
+#stockCardSideStats {
+    height: 120px;
+    width: 280px;
+}
+
+.contentStyleTop {
+    display: flex;
+    justify-content: space-between;
+}
+.contentStyleBottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rootStatsStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+}
+
+.paperStyleBar {
+    height: 340px;
+    width: 540px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.paperStylePie {
+    height: 340px;
+    width: 580px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.paperStyleLine {
+    height: 440px;
+    width: 840px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+   .contentStyleTop {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    } 
+   .contentStyleBottom {
+    display: flex;
+    justify-content: space-between;
+    } 
+   .rootStatsStyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
+    .paperStyleLine {
+        height: 440px;
+        width: 840px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    .paperStyleBar {
+        height: 250px;
+        width: 400px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    .paperStylePie {
+        height: 250px;
+        width: 400px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    #stockCardSideStats {
+        height: 120px;
+        width: 260px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .contentStyleTop {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+    } 
+    .contentStyleBottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    } 
+    .rootStatsStyle {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around
+    }
+     .paperStyleBar {
+         height: 175px;
+         width: 280px;
+         padding: 20px;
+         margin-bottom: 30px;
+     }
+     .paperStylePie {
+         height: 175px;
+         width: 280px;
+         padding: 20px;
+         margin-bottom: 30px;
+     }
+ }

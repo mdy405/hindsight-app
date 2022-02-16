@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   makeStyles,
   Grid,
@@ -6,19 +6,19 @@ import {
   useTheme,
   Divider,
   TextField,
-  Button
-} from '@material-ui/core';
-import Logo from '../components/Logo';
-import WSIcon from '../assets/ws_logo_green.png';
-import WSLogoText from '../assets/ws_text_logo.png';
-import { Redirect } from 'react-router';
-import sendLogin from '../services/login';
-import { useScreenSize } from '../helpers/screen';
+  Button,
+} from "@material-ui/core";
+import Logo from "../components/Logo";
+import WSIcon from "../assets/ws_logo_green.png";
+import WSLogoText from "../assets/ws_text_logo.png";
+import { Redirect } from "react-router";
+import sendLogin from "../services/login";
+import { useScreenSize } from "../helpers/screen";
 
-const styles = makeStyles(theme => ({
+const styles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     alignItems: "center",
     padding: `0px ${theme.spacing(4)}px`,
   },
@@ -28,15 +28,15 @@ const styles = makeStyles(theme => ({
   },
   headerText: {
     margin: 0,
-    lineHeight: 1
+    lineHeight: 1,
   },
-  wealthsimpleConnect: props => ({
-    flexDirection: props.screen === 'small' ? 'column' : 'row',
-    alignItems: 'center',
+  wealthsimpleConnect: (props) => ({
+    flexDirection: props.screen === "small" ? "column" : "row",
+    alignItems: "center",
     justifyContent: "center",
   }),
-  wsLogo: props => ({
-    marginLeft: props.screen === 'small' ? 0 : theme.spacing(2),
+  wsLogo: (props) => ({
+    marginLeft: props.screen === "small" ? 0 : theme.spacing(2),
   }),
   wsLogoIcon: {
     width: 36,
@@ -44,34 +44,37 @@ const styles = makeStyles(theme => ({
     borderRadius: 50,
   },
   wsLogoText: {
-    height: 36
+    height: 36,
   },
   divider: {
     height: 1,
     width: "100%",
-    backgroundColor: '#3D3939',
+    backgroundColor: "#3D3939",
     margin: "5% 0px",
   },
-  form: props => ({
+  form: (props) => ({
     marginTop: theme.spacing(2),
     justifyContent: "center",
-    flexDirection: props.screen === 'small' ? 'column' : 'row',
+    flexDirection: props.screen === "small" ? "column" : "row",
   }),
-  formTextfield: props => ({
-    margin: props.screen === 'small' ? `${theme.spacing(1)}px 0px` : `0px ${theme.spacing(1)}px`,
-    '& input': {
+  formTextfield: (props) => ({
+    margin:
+      props.screen === "small"
+        ? `${theme.spacing(1)}px 0px`
+        : `0px ${theme.spacing(1)}px`,
+    "& input": {
       color: theme.palette.secondary.main,
-      fontSize: props.screen === 'small' ? 16 : 12,
+      fontSize: props.screen === "small" ? 16 : 12,
       padding: theme.spacing(1.25),
       border: `solid 2px ${theme.palette.secondary.dark}`,
       borderRadius: 6,
     },
-    '& .MuiInputLabel-root': {
+    "& .MuiInputLabel-root": {
       color: theme.palette.secondary.main,
     },
-    '& .Mui-focused': {
-      color: theme.palette.primary.main
-    }
+    "& .Mui-focused": {
+      color: theme.palette.primary.main,
+    },
   }),
   loginButton: {
     borderRadius: 10,
@@ -80,8 +83,8 @@ const styles = makeStyles(theme => ({
   },
   loginDisabled: {
     backgroundColor: `${theme.palette.secondary.dark} !important`,
-    color: `${theme.palette.secondary.main} !important`
-  }
+    color: `${theme.palette.secondary.main} !important`,
+  },
 }));
 
 const Header = (props) => {
@@ -101,7 +104,7 @@ const Header = (props) => {
       </Typography>
     </Grid>
   );
-}
+};
 
 const WealthsimpleConnect = (props) => {
   const screen = useScreenSize();
@@ -109,22 +112,24 @@ const WealthsimpleConnect = (props) => {
 
   return (
     <Grid container className={classes.wealthsimpleConnect}>
-      <Typography
-        variant="h6"
-        color='secondary'
-      >
+      <Typography variant="h6" color="secondary">
         Connect with
       </Typography>
-      <Grid
-        item
-        className={classes.wsLogo}
-      >
-        <img src={WSIcon} className={classes.wsLogoIcon} alt="Wealthsimple Trade circle logo" />
-        <img src={WSLogoText} className={classes.wsLogoText} alt="Wealthsimple Trade text logo" />
+      <Grid item className={classes.wsLogo}>
+        <img
+          src={WSIcon}
+          className={classes.wsLogoIcon}
+          alt="Wealthsimple Trade circle logo"
+        />
+        <img
+          src={WSLogoText}
+          className={classes.wsLogoText}
+          alt="Wealthsimple Trade text logo"
+        />
       </Grid>
     </Grid>
   );
-}
+};
 
 const Form = (props) => {
   const screen = useScreenSize();
@@ -133,7 +138,7 @@ const Form = (props) => {
   return (
     <Grid container>
       <WealthsimpleConnect />
-      <Grid container className={classes.form}> 
+      <Grid container className={classes.form}>
         <TextField
           autoFocus
           variant="outlined"
@@ -143,8 +148,8 @@ const Form = (props) => {
           className={classes.formTextfield}
           value={props.credentials.email.value}
           onChange={props.credentials.email.update}
-          error={props.loginState === 'invalid'}
-          disabled={props.loginState === 'in-progress'}
+          error={props.loginState === "invalid"}
+          disabled={props.loginState === "in-progress"}
         />
         <TextField
           variant="outlined"
@@ -154,9 +159,9 @@ const Form = (props) => {
           className={classes.formTextfield}
           value={props.credentials.password.value}
           onChange={props.credentials.password.update}
-          disabled={props.loginState === 'in-progress'}
+          disabled={props.loginState === "in-progress"}
           onKeyPress={(event) => {
-            if (event.key === 'Enter' && props.loginState === 'waiting') {
+            if (event.key === "Enter" && props.loginState === "waiting") {
               props.login();
             }
           }}
@@ -166,12 +171,12 @@ const Form = (props) => {
           color="primary"
           className={classes.loginButton}
           disabled={
-            props.credentials.password.value === '' ||
-            props.credentials.email.value === '' ||
-            props.loginState !== 'waiting'
+            props.credentials.password.value === "" ||
+            props.credentials.email.value === "" ||
+            props.loginState !== "waiting"
           }
           classes={{
-            disabled: classes.loginDisabled
+            disabled: classes.loginDisabled,
           }}
           onClick={props.login}
         >
@@ -180,26 +185,37 @@ const Form = (props) => {
       </Grid>
     </Grid>
   );
-}
+};
 
 const Login = (props) => {
   const classes = styles(props);
 
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ loginState, setLoginState ] = useState('waiting');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginState, setLoginState] = useState("waiting");
+  const [tokens, setTokens] = useState(null);
 
   // trivial redirect to OTP view until the backend service
   // is hooked up to the frontend
-  if (loginState === 'done') {
+  if (loginState === "done") {
     return (
-      <Redirect to={{
-        pathname: "/otp",
-        state: {
-          email,
-          password
-        }
-      }}
+      <Redirect
+        to={{
+          pathname: "/otp",
+          state: {
+            email,
+            password,
+          },
+        }}
+      />
+    );
+  } else if (loginState === "valid" && tokens !== null) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/loading",
+          state: tokens,
+        }}
       />
     );
   }
@@ -207,7 +223,7 @@ const Login = (props) => {
   return (
     <Grid container className={classes.root}>
       <Header />
-      <Divider className={classes.divider}/>
+      <Divider className={classes.divider} />
       <Form
         credentials={{
           email: {
@@ -217,31 +233,41 @@ const Login = (props) => {
           password: {
             value: password,
             update: (event) => setPassword(event.target.value),
-          }
+          },
         }}
-
         login={async () => {
-
           // check emaill format validity
           if (!email.match(/.+@.+\..+/)) {
-            setLoginState('invalid');
-            setTimeout(() => setLoginState('waiting'), 1000);
+            setLoginState("invalid");
+            setTimeout(() => setLoginState("waiting"), 1000);
             return;
           }
 
           // start login process
-          setLoginState('in-progress');
+          setLoginState("in-progress");
           // this will always fail because OTP is not being provided; however,
           // this must be done to trigger an OTP dispatch from Wealthsimple
-          await sendLogin(email, password).catch(() => {});
-          // move the user to the OTP page
-          setLoginState('done');
+          let tokens = null;
+          const res = await sendLogin(email, password);
+          tokens = await res.json();
+          // Redirect to insights page on successful login
+          if (
+            loginState === "waiting" &&
+            tokens.access &&
+            tokens.refresh &&
+            tokens.expires
+          ) {
+            setLoginState("valid");
+            setTokens(tokens);
+          } else {
+            // move the user to the OTP page
+            setLoginState("done");
+          }
         }}
-
         loginState={loginState}
       />
-    </Grid> 
-  )
+    </Grid>
+  );
 };
 
 export default Login;
